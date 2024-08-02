@@ -1,0 +1,26 @@
+﻿@page "/ListOfProducts"
+@using BlazorApp1.Models;
+@using BlazorApp1.Services;
+@inject IProductService service;
+<h3>ProductList</h3>
+
+<hr/>
+<table border="1">
+    @foreach (var product in products)
+    {
+        <tr>
+            <td>@product.productId</td>
+            <td>@product.productName</td>
+            <td>@product.productPrice</td>
+        </tr>
+    }
+</table>
+@code {
+    private List<Product> products = new List<Product>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = (await service.GetProductsAsync()).ToList();
+    }
+
+}
