@@ -1,0 +1,27 @@
+﻿@page "/AllEmployees"
+<h3>AllEmployees</h3>
+<h2>@myMessage</h2>
+
+<table>
+    @foreach (var emp in allEmpList)
+    {
+        <tr>
+            <td>@emp</td>
+        </tr>
+    }
+</table>
+
+@code {
+    private string myMessage = string.Empty;
+    private List<string> allEmpList = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        myMessage = "Hello World";
+        var records = new List<string>
+        {
+            "Phaniraj", "Vinod", "Suresh", "Kumar", "Supreet"
+        };
+        allEmpList = records;
+    }
+}
