@@ -35,7 +35,7 @@
                         <td>@emp.Salary</td>
                         <td>
                             <a class="btn btn-success" href="Details/@emp.Id">Edit</a>
-                            <a class="btn btn-danger" href="Delete/@emp.Id">Delete</a>
+                            <a class="btn btn-danger" @onclick="@(() => OnDelete(emp.Id))">Delete</a>
                         </td>
                     </tr>
                 }
@@ -56,5 +56,10 @@
     private void SearchByName()
     {
         empList = EmployeeRepo.GetAll().FindAll(e => e.Name.Contains(searchName));
+    }
+
+    private void OnDelete(int id)
+    {
+        EmployeeRepo.DeleteEmployee(id);
     }
 }
