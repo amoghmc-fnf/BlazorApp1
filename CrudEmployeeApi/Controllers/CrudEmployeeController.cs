@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ namespace CrudEmployeeApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("cors")]
     //api/CrudEmployee/
     public class CrudEmployeeController : ControllerBase
     {
@@ -53,7 +55,7 @@ namespace CrudEmployeeApi.Controllers
             else return BadRequest("Employee not found to update!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
             var found = await _context.Employees.FirstOrDefaultAsync((e) => e.Id == id);

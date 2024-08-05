@@ -1029,3 +1029,4 @@ C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApp\obj\Debug\net8.0\CrudEm
 C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApp\obj\Debug\net8.0\refint\CrudEmployeeApp.dll
 C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApp\obj\Debug\net8.0\CrudEmployeeApp.pdb
 C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApp\obj\Debug\net8.0\ref\CrudEmployeeApp.dll
+C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApp\bin\Debug\net8.0\appsettings.json

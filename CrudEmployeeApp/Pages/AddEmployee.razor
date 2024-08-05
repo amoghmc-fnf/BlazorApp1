@@ -2,6 +2,8 @@
 @inject NavigationManager nav
 @inject IJSRuntime js
 @using CrudEmployeeApp.Models
+@using CrudEmployeeApp.Services;
+@inject IEmpService EmpService;
 
 <FormControl Heading="Register New Employee" ButtonText="Add Record" OnSubmit="@AddNewEmployee" emp="@emp" />
 
@@ -12,7 +14,7 @@
     {
         if (await js.InvokeAsync<bool>("confirm", $"Do you really want to add?"))
         {
-            EmployeeRepo.AddEmployee(emp);
+            await EmpService.AddEmployee(emp);
             nav.NavigateTo("AllEmployees");
         }
     }

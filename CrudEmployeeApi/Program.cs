@@ -10,10 +10,22 @@ namespace CrudEmployeeApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            // Add EmployeeDbContext
             builder.Services.AddDbContext<EmployeeDbContext>(options =>
             {
                 var connString = builder.Configuration.GetConnectionString("FnfTraining");
                 options.UseSqlServer(connString);
+            });
+
+            //Add services to use CORS
+            builder.Services.AddCors(setUp =>
+            {
+                setUp.AddPolicy("cors", setUp =>
+                {
+                    setUp.AllowAnyHeader();
+                    setUp.AllowAnyMethod();
+                    setUp.AllowAnyOrigin();
+                });
             });
 
             builder.Services.AddControllers();
@@ -30,11 +42,11 @@ namespace CrudEmployeeApi
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("cors");
             app.UseAuthorization();
 
 
             app.MapControllers();
-
             app.Run();
         }
     }

@@ -1,7 +1,9 @@
 ﻿@page "/Details/{id:int}"
 @inject NavigationManager nav
 @inject IJSRuntime js
-@using CrudEmployeeApp.Models
+@using CrudEmployeeApp.Services;
+@inject IEmpService EmpService;
+@using CrudEmployeeApp.Models;
 
 
 @if (selected == null)
@@ -26,7 +28,7 @@ else
     {
         if (await js.InvokeAsync<bool>("confirm", $"Do you really want to update?"))
         {
-            EmployeeRepo.UpdateEmployee(selected);
+            await EmpService.UpdateEmployee(selected);
             nav.NavigateTo("AllEmployees");
         }
         // else

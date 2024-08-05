@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "CrudEmployeeApp",
   "resources": {
-    "hash": "sha256-2nIjgWJfqNXJQuNMtOk1Eu8V79l/HSJPWM65sRhHoyY=",
+    "hash": "sha256-T+msj5F6kfV4c0CVocPf2CDlcGfsopc0ngOhzcdDVhQ=",
     "jsModuleNative": {
       "dotnet.native.8.0.7.ra2shor2yv.js": "sha256-tFsxPBbhkdn6GKNBKvCRLzrfAHdyM86odYTe0MtrwMk="
     },
@@ -208,10 +208,10 @@
       "mscorlib.wasm": "sha256-fLbZiSHBNdpHoh4EgRqMaNP5NQyIK5TEj6AXFLqo8m8=",
       "netstandard.wasm": "sha256-d4xbAE8qrKq5euUoZHPO+jkYPjlCYBzUew45MKsYKic=",
       "System.Private.CoreLib.wasm": "sha256-8yi6NcX1lkNQgV4WKjnMBYIZyKh4P+OXnXVQmgxGZD4=",
-      "CrudEmployeeApp.wasm": "sha256-H679XOldSz5evsThEHc19UI7TFQueO/+EdiFhRttnig="
+      "CrudEmployeeApp.wasm": "sha256-CPQuHMu5N5GSqXGy70DdtsyLygQVoIeRtwAe+BZ918g="
     },
     "pdb": {
-      "CrudEmployeeApp.pdb": "sha256-bbKMn2KOktd7f2tkeGg7cxEqNhRbik7lPgV1Ev5Htto="
+      "CrudEmployeeApp.pdb": "sha256-Go3y5cWkeaDLl8H5CKihoVYqdFDhckOqEeVj1Wt37Pk="
     }
   },
   "cacheBootResources": true,

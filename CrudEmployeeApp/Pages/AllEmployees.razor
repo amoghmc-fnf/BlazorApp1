@@ -1,4 +1,7 @@
 ﻿@page "/allEmployees"
+@using CrudEmployeeApp.Services;
+@inject IEmpService EmpService;
+@inject IJSRuntime js
 @using CrudEmployeeApp.Models
 
 <div>
@@ -47,19 +50,22 @@
 @code {
     private List<Employee> empList = null;
     public string searchName { get; set; } = string.Empty;
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        empList = EmployeeRepo.GetAll();
-        return base.OnInitializedAsync();
+        empList = await EmpService.GetAll();
     }
 
-    private void SearchByName()
+    private async Task SearchByName()
     {
-        empList = EmployeeRepo.GetAll().FindAll(e => e.Name.Contains(searchName));
+        empList = await EmpService.GetByName(searchName);
     }
 
-    private void OnDelete(int id)
+    private async Task OnDelete(int id)
     {
-        EmployeeRepo.DeleteEmployee(id);
+        if (await js.InvokeAsync<bool>("confirm", $"Do you really want to update?"))
+        {
+            await EmpService.DeleteEmployee(id);
+            empList = await EmpService.GetAll();
+        }
     }
 }
