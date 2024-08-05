@@ -1,0 +1,29 @@
+﻿@page "/Details/{id:int}"
+@using CrudEmployeeApp.Models
+
+<h3>Details</h3>
+
+@if (selected == null)
+{
+    <text>Employee is not found!</text>
+}
+else
+{
+    <div class="p-4">
+        <p>Id: <InputNumber @bind-Value="selected.Id" class="form-control" /> </p>
+        <p>Name: <InputText @bind-Value="selected.Name" class="form-control" /> </p>
+        <p>Address: <InputText @bind-Value="selected.Address" class="form-control" /> </p>
+        <p>Salary: <InputNumber @bind-Value="selected.Salary" class="form-control" /> </p>
+        <p><button type="submit" class="btn btn-success">Save changes</button></p>
+    </div>
+}
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private Employee selected { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        selected = EmployeeRepo.GetById(id);
+    }
+}

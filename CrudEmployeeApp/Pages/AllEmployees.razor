@@ -1,0 +1,59 @@
+﻿@page "/allEmployees"
+@using CrudEmployeeApp.Models
+
+<div>
+    <h1>List of employees</h1>
+    <hr/>
+    @if (empList == null)
+    {
+        <text>Loading...</text>
+    }
+    else if (empList.Count == 0)
+    {
+        <text>No employee records found!</text>
+    }
+    else
+    {
+        <input type="search" class="form-control" placeholder="Search by name" @bind="searchName" @bind:after="SearchByName"/>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Employee Id</td>
+                    <td>Employee Name</td>
+                    <td>Employee Address</td>
+                    <td>Employee Salary</td>
+                    <td>Options</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in empList)
+                {
+                    <tr>
+                        <td>@emp.Id</td>
+                        <td>@emp.Name</td>
+                        <td>@emp.Address</td>
+                        <td>@emp.Salary</td>
+                        <td>
+                            <a class="btn btn-success" href="Details/@emp.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private List<Employee> empList = null;
+    public string searchName { get; set; } = string.Empty;
+    protected override Task OnInitializedAsync()
+    {
+        empList = EmployeeRepo.GetAll();
+        return base.OnInitializedAsync();
+    }
+
+    private void SearchByName()
+    {
+        empList = EmployeeRepo.GetAll().FindAll(e => e.Name.Contains(searchName));
+    }
+}
