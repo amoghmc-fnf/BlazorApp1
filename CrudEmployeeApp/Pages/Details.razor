@@ -1,7 +1,8 @@
 ﻿@page "/Details/{id:int}"
+@inject NavigationManager nav
+@inject IJSRuntime js
 @using CrudEmployeeApp.Models
 
-<h3>Details</h3>
 
 @if (selected == null)
 {
@@ -9,13 +10,7 @@
 }
 else
 {
-    <div class="p-4">
-        <p>Id: <InputNumber @bind-Value="selected.Id" class="form-control" /> </p>
-        <p>Name: <InputText @bind-Value="selected.Name" class="form-control" /> </p>
-        <p>Address: <InputText @bind-Value="selected.Address" class="form-control" /> </p>
-        <p>Salary: <InputNumber @bind-Value="selected.Salary" class="form-control" /> </p>
-        <p><button type="submit" class="btn btn-success">Save changes</button></p>
-    </div>
+    <FormControl emp="@selected" ButtonText="Update Changes" Heading="Edit Employee" OnSubmit="@OnUpdate" />
 }
 @code {
     [Parameter]
@@ -25,5 +20,18 @@ else
     protected override async Task OnInitializedAsync()
     {
         selected = EmployeeRepo.GetById(id);
+    }
+
+    private async Task OnUpdate()
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you really want to update?"))
+        {
+            EmployeeRepo.UpdateEmployee(selected);
+            nav.NavigateTo("AllEmployees");
+        }
+        // else
+        // {
+        //     js.InvokeVoidAsync("alert", $"User has selected to cancel the operation");
+        // }
     }
 }

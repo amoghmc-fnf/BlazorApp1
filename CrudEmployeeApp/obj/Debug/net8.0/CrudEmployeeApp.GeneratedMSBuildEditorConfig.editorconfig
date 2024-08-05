@@ -26,6 +26,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/6147952/source/repos/BlazorApp1/CrudEmployeeApp/Pages/AddEmployee.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkRW1wbG95ZWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/6147952/source/repos/BlazorApp1/CrudEmployeeApp/Pages/AllEmployees.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWxsRW1wbG95ZWVzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -36,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/6147952/source/repos/BlazorApp1/CrudEmployeeApp/Pages/Details.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/6147952/source/repos/BlazorApp1/CrudEmployeeApp/Pages/FormControl.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9ybUNvbnRyb2wucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/6147952/source/repos/BlazorApp1/CrudEmployeeApp/Pages/Home.razor]

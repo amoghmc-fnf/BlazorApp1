@@ -1,0 +1,15 @@
+﻿@page "/AddEmployee"
+@inject NavigationManager nav
+@using CrudEmployeeApp.Models
+
+<FormControl Heading="Register New Employee" ButtonText="Add Record" OnSubmit="@AddNewEmployee" emp="@emp" />
+
+@code {
+    private Employee emp = new();
+
+    void AddNewEmployee()
+    {
+        EmployeeRepo.AddEmployee(emp);
+        nav.NavigateTo("AllEmployees");
+    }
+}
