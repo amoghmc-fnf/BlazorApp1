@@ -21,7 +21,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        selected = EmployeeRepo.GetById(id);
+        selected = await EmpService.GetById(id);
     }
 
     private async Task OnUpdate()
@@ -29,7 +29,7 @@ else
         if (await js.InvokeAsync<bool>("confirm", $"Do you really want to update?"))
         {
             await EmpService.UpdateEmployee(selected);
-            nav.NavigateTo("AllEmployees");
+            nav.NavigateTo("/AllEmployees");
         }
         // else
         // {

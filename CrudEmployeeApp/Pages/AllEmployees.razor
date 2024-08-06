@@ -62,7 +62,7 @@
 
     private async Task OnDelete(int id)
     {
-        if (await js.InvokeAsync<bool>("confirm", $"Do you really want to update?"))
+        if (await js.InvokeAsync<bool>("confirm", $"Do you really want to delete?"))
         {
             await EmpService.DeleteEmployee(id);
             empList = await EmpService.GetAll();

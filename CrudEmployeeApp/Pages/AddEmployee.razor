@@ -15,7 +15,7 @@
         if (await js.InvokeAsync<bool>("confirm", $"Do you really want to add?"))
         {
             await EmpService.AddEmployee(emp);
-            nav.NavigateTo("AllEmployees");
+            nav.NavigateTo("/AllEmployees");
         }
     }
 }

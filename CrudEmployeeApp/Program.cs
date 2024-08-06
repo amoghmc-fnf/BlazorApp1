@@ -14,7 +14,7 @@ namespace CrudEmployeeApp
 
             builder.Services.AddScoped(sp => new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:5204/api/CrudEmployee/\"")
+                BaseAddress = new Uri("http://localhost:5204/api/CrudEmployee")
             });
 
             builder.Services.AddScoped<IEmpService, CrudEmployeeService>();

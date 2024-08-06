@@ -30,17 +30,17 @@ namespace CrudEmployeeApp.Services
 
         public Task<HttpResponseMessage> DeleteEmployee(int id)
         {
-            return httpClient.DeleteAsync($"{id}");
+            return httpClient.DeleteAsync($"/api/CrudEmployee/{id}");
         }
 
         public async Task<List<Employee>> GetAll()
         {
-            return await httpClient.GetFromJsonAsync<List<Employee>>("AllEmployees");
+            return await httpClient.GetFromJsonAsync<List<Employee>>("/api/CrudEmployee/AllEmployees");
         }
 
         public async Task<Employee> GetById(int id)
         {
-            var content = await httpClient.GetAsync($"AllEmployees/{id}");
+            var content = await httpClient.GetAsync($"/api/CrudEmployee/AllEmployees/{id}");
             var data = await content.Content.ReadFromJsonAsync<Employee>();
             return data;
         }
