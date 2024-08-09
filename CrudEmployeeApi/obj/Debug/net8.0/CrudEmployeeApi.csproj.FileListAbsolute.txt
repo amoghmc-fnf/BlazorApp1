@@ -134,3 +134,4 @@ C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApi\obj\Debug\net8.0\refint
 C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApi\obj\Debug\net8.0\CrudEmployeeApi.pdb
 C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApi\obj\Debug\net8.0\CrudEmployeeApi.genruntimeconfig.cache
 C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApi\obj\Debug\net8.0\ref\CrudEmployeeApi.dll
+C:\Users\6147952\source\repos\BlazorApp1\CrudEmployeeApi\obj\Debug\net8.0\CrudEmployeeApi.sourcelink.json

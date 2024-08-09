@@ -27,8 +27,10 @@ namespace CrudEmployeeApi.Controllers
         [HttpGet("AllEmployees/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var data = await _context.Employees.FirstOrDefaultAsync((e) => e.Id == id);
-            return Ok(data);
+            var found = await _context.Employees.FirstOrDefaultAsync((e) => e.Id == id);
+            if (found == null) 
+                return BadRequest("Employee not found!");
+            return Ok(found);
         }
 
         [HttpPost]
@@ -49,6 +51,7 @@ namespace CrudEmployeeApi.Controllers
                 found.Name = emp.Name;
                 found.Address = emp.Address;
                 found.Salary = emp.Salary;
+                found.Pic = emp.Pic;
                 await _context.SaveChangesAsync();
                 return Ok("Employee updated successfully!");
             }
