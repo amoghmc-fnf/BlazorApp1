@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices.JavaScript;
 
 namespace CrudEmployeeApi.Controllers
 {
@@ -28,8 +29,8 @@ namespace CrudEmployeeApi.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var found = await _context.Employees.FirstOrDefaultAsync((e) => e.Id == id);
-            if (found == null) 
-                return BadRequest("Employee not found!");
+            if (found == null)
+                return BadRequest(new { Message = "Employee not found!" });
             return Ok(found);
         }
 
@@ -39,7 +40,7 @@ namespace CrudEmployeeApi.Controllers
             employee.Id = 0;
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
-            return Ok("Employee added successfully!");
+            return Ok(new {Message = "Employee added successfully!"});
         }
 
         [HttpPut]
@@ -51,11 +52,10 @@ namespace CrudEmployeeApi.Controllers
                 found.Name = emp.Name;
                 found.Address = emp.Address;
                 found.Salary = emp.Salary;
-                found.Pic = emp.Pic;
                 await _context.SaveChangesAsync();
-                return Ok("Employee updated successfully!");
+                return Ok(new { Message = "Employee updated successfully!" });
             }
-            else return BadRequest("Employee not found to update!");
+            else return BadRequest(new { Message = "Employee not found!" });
         }
 
         [HttpDelete("{id}")]
@@ -66,9 +66,9 @@ namespace CrudEmployeeApi.Controllers
             {
                 _context.Remove(found);
                 await _context.SaveChangesAsync();
-                return Ok("Employee Deleted successfully!");
+                return Ok(new { Message = "Employee deleted successfully!" });
             }
-            else return BadRequest("Employee not found to delete!");
+            else return BadRequest(new { Message = "Employee not found!" });
         }
 
     }
