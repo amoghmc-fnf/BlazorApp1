@@ -14,7 +14,9 @@
         }
         public string GetName()
         {
-            return _config["name"];
+            // 2 ways to access appsettings
+            return _config.GetSection("MySettings:name").Value;
+            //return _config["MySettings:name"];
         }
     }
 }

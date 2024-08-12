@@ -6,19 +6,71 @@
 
 <h1>Hello, world!</h1>
 <p>@title</p>
-<button @onclick="AddFunc">Add Function</button>
-@if (result != 0) 
-{
-    <span>The result is: @result</span>
-}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                Enter the first value:
+                <InputNumber @bind-Value="firstValue"/>
+            </p>
+            <p>
+                Enter the second value:
+                <InputNumber @bind-Value="secondValue"/>
+            </p>
+            <p>
+                <InputSelect @bind-Value="option">
+                    @foreach (var opt in options)
+                    {
+                        <option>@opt</option>
+                    }
+                </InputSelect>
+            </p>
+            <p>
+                <button @onclick="OnSubmit">Get Result</button>
+            </p>
+            <p>
+                The result: @result
+            </p>
+        </div>
+    </div>
+</div>
+
 
 @code {
     string title = "apple 123";
     double result = 0;
+    double firstValue = 0;
+    double secondValue = 0;
+    string[] options = new string[] { "Add", "Subtract", "Multiply", "Divide" };
+    string option = String.Empty;
 
-    private void AddFunc()
+    protected override void OnInitialized()
     {
-        result = mathService.AddFunction(1232355, 234);
+        option = "Add";
+        base.OnInitialized();
+    }
+
+    private void OnSubmit()
+    {
+        switch (option)
+        {
+            case "Add":
+                result = mathService.AddFunction(firstValue, secondValue);
+                break;
+            case "Subtract":
+                result = mathService.SubFunction(firstValue, secondValue);
+                break;
+            case "Multiply":
+                result = mathService.MultFunction(firstValue, secondValue);
+                break;
+            case "Divide":
+                result = mathService.DivFunction(firstValue, secondValue);
+                break;
+            default:
+                result = firstValue + secondValue;
+                break;
+        }
     }
 }
 

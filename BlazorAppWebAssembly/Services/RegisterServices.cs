@@ -4,7 +4,7 @@
     {
         public static void Register(IServiceCollection services, IConfiguration config)
         {
-            string baseAddress = config.GetSection("baseUrl").Value;
+            string baseAddress = config["MySettings:baseUrl"];
             services.AddScoped<ISimpleService, SimpleService>();
             services.AddScoped<IArithematicService, ArithematicService>();
             services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) });
