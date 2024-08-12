@@ -1,0 +1,96 @@
+﻿@page "/calculator"
+@using BlazorAppWebAssembly.Models;
+@using BlazorAppWebAssembly.Services;
+@inject IArithematicService mathService;
+
+<h1>My basic calculator program</h1>
+<hr/>
+
+<EditForm Model="@calculator" OnSubmit="@OnSubmit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <p>
+                    Enter the first value:
+                    <InputNumber @bind-Value="calculator.FirstValue" />
+                </p>
+                @if (calculator.Option != "Square" && calculator.Option != "SquareRoot")
+                {
+                    <p>
+                        Enter the second value:
+                        <InputNumber @bind-Value="calculator.SecondValue" />
+                    </p>
+                }
+                <p>
+                    <InputSelect @bind-Value="calculator.Option">
+                        @foreach (var opt in options)
+                        {
+                            <option>@opt</option>
+                        }
+                    </InputSelect>
+                </p>
+                <p>
+                    <button class="btn btn-primary" type="submit">Get Result</button>
+                </p>
+                <p>
+                    The result: @result
+                </p>
+                <p>
+                    <ValidationSummary/>
+                </p>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    public Calculator calculator { get; set; }
+    public double result = 0;
+    public string[] options;
+
+    protected override void OnInitialized()
+    {
+        calculator = new Calculator();
+
+        var values = Enum.GetValues(typeof(Calculator.Options));
+        var list = new List<string>();
+        foreach (var val in values)
+            list.Add(val.ToString());
+        options = list.ToArray();
+
+        base.OnInitialized();
+    }
+
+    private void OnSubmit()
+    {
+        var option = calculator.Option;
+        var firstValue = calculator.FirstValue;
+        var secondValue = calculator.SecondValue;
+        switch (option)
+        {
+            case "Add":
+                result = mathService.AddFunction(firstValue, secondValue);
+                break;
+            case "Subtract":
+                result = mathService.SubFunction(firstValue, secondValue);
+                break;
+            case "Multiply":
+                result = mathService.MultFunction(firstValue, secondValue);
+                break;
+            case "Divide":
+                result = mathService.DivFunction(firstValue, secondValue);
+                break;
+            case "Square":
+                result = mathService.SquareFunction(firstValue);
+                break;
+            case "SquareRoot":
+                result = mathService.SquareRootFunction(firstValue);
+                break;
+        }
+    }
+
+    private void OnChange()
+    {
+        
+    }
+}

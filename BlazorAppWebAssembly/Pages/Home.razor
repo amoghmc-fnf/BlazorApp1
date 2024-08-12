@@ -14,10 +14,13 @@
                 Enter the first value:
                 <InputNumber @bind-Value="firstValue"/>
             </p>
-            <p>
-                Enter the second value:
-                <InputNumber @bind-Value="secondValue"/>
-            </p>
+            @if (option != "Square" && option != "Square Root")
+            {
+                <p>
+                    Enter the second value:
+                    <InputNumber @bind-Value="secondValue"/>
+                </p>
+            }
             <p>
                 <InputSelect @bind-Value="option">
                     @foreach (var opt in options)
@@ -42,7 +45,7 @@
     double result = 0;
     double firstValue = 0;
     double secondValue = 0;
-    string[] options = new string[] { "Add", "Subtract", "Multiply", "Divide" };
+    string[] options = new string[] { "Add", "Subtract", "Multiply", "Divide", "Square", "Square Root" };
     string option = String.Empty;
 
     protected override void OnInitialized()
@@ -67,8 +70,11 @@
             case "Divide":
                 result = mathService.DivFunction(firstValue, secondValue);
                 break;
-            default:
-                result = firstValue + secondValue;
+            case "Square":
+                result = mathService.SquareFunction(firstValue);
+                break;
+            case "Square Root":
+                result = mathService.SquareRootFunction(firstValue);
                 break;
         }
     }
