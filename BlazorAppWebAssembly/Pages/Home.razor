@@ -1,0 +1,24 @@
+﻿@page "/"
+@using BlazorAppWebAssembly.Services;
+@inject IArithematicService mathService; 
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+<p>@title</p>
+<button @onclick="AddFunc">Add Function</button>
+@if (result != 0) 
+{
+    <span>The result is: @result</span>
+}
+
+@code {
+    string title = "apple 123";
+    double result = 0;
+
+    private void AddFunc()
+    {
+        result = mathService.AddFunction(1232355, 234);
+    }
+}
+
