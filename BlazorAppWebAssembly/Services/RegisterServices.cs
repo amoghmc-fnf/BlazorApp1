@@ -2,13 +2,11 @@
 {
     public static class RegisterServices
     {
-        public static void Register(IServiceCollection services)
+        public static void Register(IServiceCollection services, IConfiguration config)
         {
-            string baseAddress = "";
-            services.AddScoped<IArithematicService, ArithematicService>(options =>
-            {
-                return new ArithematicService("Amogh");
-            });
+            string baseAddress = config.GetSection("baseUrl").Value;
+            services.AddScoped<ISimpleService, SimpleService>();
+            services.AddScoped<IArithematicService, ArithematicService>();
             services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) });
         }
     }

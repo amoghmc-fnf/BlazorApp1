@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\BlazorAppWebAssembly.styles.css"
     },
     {
+      "Id": "C:\\Users\\6147952\\source\\repos\\BlazorApp1\\BlazorAppWebAssembly\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
       "Id": "C:\\Users\\6147952\\source\\repos\\BlazorApp1\\BlazorAppWebAssembly\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },

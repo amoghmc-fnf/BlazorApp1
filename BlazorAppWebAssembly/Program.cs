@@ -12,7 +12,7 @@ namespace BlazorAppWebAssembly
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            RegisterServices.Register(builder.Services);
+            RegisterServices.Register(builder.Services, builder.Configuration);
 
             await builder.Build().RunAsync();
         }

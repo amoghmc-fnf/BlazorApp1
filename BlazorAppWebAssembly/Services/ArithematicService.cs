@@ -2,14 +2,16 @@
 {
     public class ArithematicService : IArithematicService
     {
-        private string _name;
-        public ArithematicService(string name)
+        private ISimpleService _service;
+        private string caller;
+        public ArithematicService(ISimpleService service)
         {
-            _name = name;
+            this._service = service;
+            this.caller = this._service.GetName();
         }
         public double AddFunction(double first, double second)
         {
-            Console.WriteLine("Add function called by " + _name);
+            Console.WriteLine("Add function called by " + caller);
             return first + second;
         }
         public double SubFunction(double first, double second) => first - second;
