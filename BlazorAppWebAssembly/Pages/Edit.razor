@@ -1,0 +1,50 @@
+﻿@page "/Edit/{id:int}"
+@inject NavigationManager nav
+@inject IJSRuntime js
+@using BlazorAppWebAssembly.Services
+@using BlazorAppWebAssembly.DTOs
+@inject IEmpHttpService service
+
+<div>
+    @if (emp != null)
+    {
+        <Form Model="@emp">
+            <h1>Edit Employee</h1>
+            <p style="font-weight:bold">ID: @emp.EmpId</p>
+            <p>Name: <InputText @bind-Value="emp.EmpName" class="form-control" /> </p>
+            <p>Address: <InputText @bind-Value="emp.EmpAddress" class="form-control" /> </p>
+            <p>Salary: <InputNumber @bind-Value="emp.EmpSalary" class="form-control" /> </p>
+            <p><button type="submit" @onclick=OnUpdate class="btn btn-success">Save Changes</button>           
+                <button type="submit" @onclick=OnCancel class="btn btn-danger">Cancel Changes</button>
+                </p>
+        </Form>
+    }
+    else
+    {
+        <text>Loading...</text>
+    }
+</div>
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private Employee emp { get; set; } = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        emp = await service.GetById(id);
+    }
+
+    private async Task OnUpdate()
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you really want to update?"))
+        {
+            service.Update(emp);
+            nav.NavigateTo("/Index");
+        }
+    }
+
+    private async Task OnCancel()
+    {
+        emp = await service.GetById(id);
+    }
+}
