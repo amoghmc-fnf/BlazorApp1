@@ -1,0 +1,51 @@
+﻿@page "/Add"
+@inject NavigationManager nav
+@inject IJSRuntime js
+@using BlazorAppWebAssembly.Services
+@using BlazorAppWebAssembly.DTOs
+@inject IEmpHttpService service
+
+<div>
+    <EditForm Model="@emp" OnValidSubmit="OnAdd">
+        <h1>Add Employee</h1>
+        <p>Name: <InputText @bind-Value="emp.EmpName" class="form-control" /> </p>
+        <p>Address: <InputText @bind-Value="emp.EmpAddress" class="form-control" /> </p>
+        <p>Salary: <InputNumber @bind-Value="emp.EmpSalary" class="form-control" /> </p>
+        <p>
+            Department ID:
+            <InputSelect @bind-Value=emp.DeptId class="form-select">
+                @for (int i = 0; i < 6; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </InputSelect>
+        </p>
+        <p>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <button type="button" @onclick=OnCancel class="btn btn-danger">Cancel Changes</button>
+        </p>
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+    </EditForm>
+</div>
+@code {
+    private Employee emp;
+    protected override async Task OnInitializedAsync()
+    {
+        emp = new Employee();
+    }
+
+    private async Task OnAdd()
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you really want to add record?"))
+        {
+            await service.Add(emp);
+            nav.NavigateTo("/Index");
+        }
+    }
+
+    private async Task OnCancel()
+    {
+        emp = new Employee();
+    }
+}
