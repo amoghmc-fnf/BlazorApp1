@@ -25,9 +25,18 @@ namespace WebApiRevision.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Employee> Find(int id)
+        public async Task<IActionResult> Find(int id)
         {
-            return await service.GetEmployeeById(id);
+            try
+            {
+                var found = await service.GetEmployeeById(id);
+                return Ok(found);
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            
         }
 
         [HttpPut]
@@ -40,7 +49,7 @@ namespace WebApiRevision.Controllers
             }
             catch (NullReferenceException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -54,7 +63,7 @@ namespace WebApiRevision.Controllers
             }
             catch (NullReferenceException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -68,7 +77,7 @@ namespace WebApiRevision.Controllers
             }
             catch (NullReferenceException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
     }

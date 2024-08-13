@@ -25,7 +25,7 @@ namespace WebApiRevision.Services
         {
             var found = await _context.EmpTables.FindAsync(empId);
             if (found is null)
-                throw new NullReferenceException("Employee not found!");
+                throw new NullReferenceException($"Employee with ID: {empId} not found!");
             Employee emp = new Employee
             {
                 EmpId = found.EmpId,
@@ -79,7 +79,8 @@ namespace WebApiRevision.Services
             var found = _context.EmpTables.FirstOrDefault(e => e.EmpId == emp.EmpId);
             if (found == null)
             {
-                throw new NullReferenceException("Employee not found!");
+                throw new NullReferenceException($"Employee with ID: {emp.EmpId} not found to update!");
+
             }
 
             found.EmpAddress = emp.EmpAddress;
@@ -96,7 +97,7 @@ namespace WebApiRevision.Services
             var found = _context.EmpTables.FirstOrDefault(e => e.EmpId == empId);
             if (found == null)
             {
-                throw new NullReferenceException("Employee not found!");
+                throw new NullReferenceException($"Employee with ID: {empId} not found to delete!");
             }
             _context.EmpTables.Remove(found);
             await _context.SaveChangesAsync();
