@@ -1,0 +1,54 @@
+﻿@using BlazorAppWebAssembly.DTOs;
+@using BlazorAppWebAssembly.Services;
+@inject IJSRuntime js
+@inject IEmpHttpService service;
+
+@page "/Index"
+
+<h3>Index</h3>
+<div>
+    @if (employees == null)
+    {
+        <text>Loading...</text>
+    }
+    else
+    {
+        foreach (var emp in employees)
+        {
+            <div style="background-color:bisque" class="col-md-5">
+                <div class="card p-2">
+                    <div class="card-title">
+                        <h2>@emp.EmpName</h2>
+                        <div class="card-body">
+                            <p>Emp ID: @emp.EmpId</p>
+                            <p>Emp Address: @emp.EmpAddress</p>
+                            <p>Emp Salary: $@emp.EmpSalary</p>
+                            <p>Emp Dept ID: @emp.DeptId</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Edit</a>
+                            <a @onclick="@(() => OnDelete(emp.EmpId))" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    public List<Employee> employees { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        employees = await service.GetAll();
+    }
+    private async Task OnDelete(int id)
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you really want to delete?"))
+        {
+            await service.DeleteById(id);
+            employees = await service.GetAll();
+        }
+    }
+}

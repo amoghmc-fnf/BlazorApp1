@@ -13,6 +13,6 @@ namespace BlazorAppWebAssembly.Models
         public double FirstValue {  get; set; }
         [Required(ErrorMessage = "Second value must be set")]
         public double SecondValue { get; set; }
-        public string Option { get; set; }
+        public Options Option { get; set; }
     }
 }

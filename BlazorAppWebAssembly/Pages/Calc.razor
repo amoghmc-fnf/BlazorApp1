@@ -1,4 +1,5 @@
 ﻿@page "/calculator"
+@using static BlazorAppWebAssembly.Models.Calculator;
 @using BlazorAppWebAssembly.Models;
 @using BlazorAppWebAssembly.Services;
 @inject IArithematicService mathService;
@@ -14,7 +15,7 @@
                     Enter the first value:
                     <InputNumber @bind-Value="calculator.FirstValue" />
                 </p>
-                @if (calculator.Option != "Square" && calculator.Option != "SquareRoot")
+                @if (calculator.Option != Options.Square && calculator.Option != Options.SquareRoot)
                 {
                     <p>
                         Enter the second value:
@@ -23,7 +24,7 @@
                 }
                 <p>
                     <InputSelect @bind-Value="calculator.Option">
-                        @foreach (var opt in options)
+                        @foreach (var opt in Enum.GetValues(typeof(Options)))
                         {
                             <option>@opt</option>
                         }
@@ -36,6 +37,7 @@
                     The result: @result
                 </p>
                 <p>
+                    <DataAnnotationsValidator/>
                     <ValidationSummary/>
                 </p>
             </div>
@@ -46,18 +48,10 @@
 @code {
     public Calculator calculator { get; set; }
     public double result = 0;
-    public string[] options;
 
     protected override void OnInitialized()
     {
         calculator = new Calculator();
-
-        var values = Enum.GetValues(typeof(Calculator.Options));
-        var list = new List<string>();
-        foreach (var val in values)
-            list.Add(val.ToString());
-        options = list.ToArray();
-
         base.OnInitialized();
     }
 
@@ -66,31 +60,28 @@
         var option = calculator.Option;
         var firstValue = calculator.FirstValue;
         var secondValue = calculator.SecondValue;
+
         switch (option)
         {
-            case "Add":
+            case Options.Add:
                 result = mathService.AddFunction(firstValue, secondValue);
                 break;
-            case "Subtract":
+            case Options.Subtract:
                 result = mathService.SubFunction(firstValue, secondValue);
                 break;
-            case "Multiply":
+            case Options.Multiply:
                 result = mathService.MultFunction(firstValue, secondValue);
                 break;
-            case "Divide":
+            case Options.Divide:
                 result = mathService.DivFunction(firstValue, secondValue);
                 break;
-            case "Square":
+            case Options.Square:
                 result = mathService.SquareFunction(firstValue);
                 break;
-            case "SquareRoot":
+            case Options.SquareRoot:
                 result = mathService.SquareRootFunction(firstValue);
                 break;
         }
     }
 
-    private void OnChange()
-    {
-        
-    }
 }
