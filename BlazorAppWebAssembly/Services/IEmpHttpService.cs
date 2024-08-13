@@ -28,7 +28,7 @@ namespace BlazorAppWebAssembly.Services
 
         public async Task DeleteById(int id)
         {
-            await _httpClient.DeleteAsync($"Employee\\/{id}");
+            await _httpClient.DeleteAsync($"Employee/{id}");
         }
 
         public async Task<List<Employee>> GetAll()
