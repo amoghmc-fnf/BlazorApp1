@@ -8,16 +8,19 @@
 <div>
     @if (emp != null)
     {
-        <Form Model="@emp">
+        <EditForm Model="@emp" OnValidSubmit="OnUpdate">
             <h1>Edit Employee</h1>
             <p style="font-weight:bold">ID: @emp.EmpId</p>
             <p>Name: <InputText @bind-Value="emp.EmpName" class="form-control" /> </p>
             <p>Address: <InputText @bind-Value="emp.EmpAddress" class="form-control" /> </p>
             <p>Salary: <InputNumber @bind-Value="emp.EmpSalary" class="form-control" /> </p>
-            <p><button type="submit" @onclick=OnUpdate class="btn btn-success">Save Changes</button>           
-                <button type="submit" @onclick=OnCancel class="btn btn-danger">Cancel Changes</button>
-                </p>
-        </Form>
+            <p>
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <button type="button" @onclick=OnCancel class="btn btn-danger">Cancel Changes</button>
+            </p>
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+        </EditForm>
     }
     else
     {
@@ -38,7 +41,7 @@
     {
         if (await js.InvokeAsync<bool>("confirm", $"Do you really want to update?"))
         {
-            service.Update(emp);
+            await service.Update(emp);
             nav.NavigateTo("/Index");
         }
     }
